@@ -1,18 +1,14 @@
 package model;
 
+import lombok.Data;
+
 import java.util.Objects;
 
+@Data
 public class StringSymbol extends Symbol {
     private String value;
 
     public StringSymbol(String value){
-        this.value = value;
-    }
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
         this.value = value;
     }
 
