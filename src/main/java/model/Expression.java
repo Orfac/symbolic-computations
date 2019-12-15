@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Expression extends Symbol  {
     private StringSymbol head;
     private Symbol[] arguments;
@@ -24,11 +26,7 @@ public class Expression extends Symbol  {
 
     @Override
     public String toString(){
-        StringBuilder builder = new StringBuilder();
-        for (Symbol argument : arguments) {
-            builder.append(argument.toString());
-        }
-        return head.toString() + "(" + builder.toString() + ")";
+        return head.toString() + Arrays.toString(arguments);
     }
 
 }
