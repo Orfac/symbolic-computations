@@ -1,0 +1,38 @@
+{
+  "expression" : {
+    "head" : {
+      "symbol" : "="
+    },
+    "arguments" : [
+
+      {
+        "symbol" : {
+          "value": "10",
+          "type": "constant"
+        }
+      },
+      {
+        "expression": {
+          "head": {
+            "symbol": "^1/"
+          },
+          "arguments": [
+            {
+              "symbol" : {
+                "value": "a",
+                "type": "symbol"
+              }
+            },
+            {
+              "symbol" : {
+                "value": "b",
+                "type": "symbol"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "variable": "a"
+}
