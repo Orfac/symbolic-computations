@@ -4,6 +4,7 @@ import model.StringSymbol;
 import services.EvaluationService;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Program {
@@ -13,7 +14,7 @@ public class Program {
 //
 //        System.out.println(inputDto);
         Function<Symbol[], Symbol> function = symbols -> new Expression(new StringSymbol("sum"), symbols);
-        HashMap<StringSymbol,Symbol> symbolRules = new HashMap<StringSymbol,Symbol>();
+        HashMap<StringSymbol,Symbol> symbolRules = new HashMap<>();
         symbolRules.put(
                 new StringSymbol("a"),
                 new Expression(new StringSymbol("+"), new Symbol[] {new StringSymbol("b"), new StringSymbol("c")}));
@@ -23,7 +24,6 @@ public class Program {
 
         EvaluationService service = new EvaluationService( symbolRules,expressionRules);
         Symbol exp = service.EvaluateExpression(new Expression(new StringSymbol("+"), new Symbol[]{new StringSymbol("a")}));
-        int a =5;
         System.out.println(exp);
     }
 }
