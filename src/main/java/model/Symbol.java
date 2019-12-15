@@ -1,7 +1,4 @@
 package model;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public abstract class Symbol {
     @Override
     public String toString() {

@@ -14,6 +14,7 @@ public class Program {
 //
 //        System.out.println(inputDto);
         Function<Symbol[], Symbol> function = symbols -> new Expression(new StringSymbol("sum"), symbols);
+
         HashMap<StringSymbol,Symbol> symbolRules = new HashMap<>();
         symbolRules.put(
                 new StringSymbol("a"),
@@ -23,7 +24,16 @@ public class Program {
         expressionRules.put(new StringSymbol("+"), function);
 
         EvaluationService service = new EvaluationService( symbolRules,expressionRules);
-        Symbol exp = service.EvaluateExpression(new Expression(new StringSymbol("+"), new Symbol[]{new StringSymbol("a")}));
+        Symbol exp = service.EvaluateExpression(new Expression(new StringSymbol(":"), new Symbol[]{
+                new Expression(new StringSymbol(":="),
+                        new Symbol[]{
+                                new StringSymbol("e"),
+                                new Expression(new StringSymbol("+"),
+                                        new Symbol[]{new StringSymbol("b"), new StringSymbol("c")}),
+                        }),
+                new StringSymbol("e")
+        }));
+
         System.out.println(exp);
     }
 }
