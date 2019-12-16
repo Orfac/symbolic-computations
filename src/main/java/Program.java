@@ -24,8 +24,8 @@ public class Program {
         expressionRules.put(new StringSymbol("+"), function);
 
         EvaluationService service = new EvaluationService( symbolRules,expressionRules);
-        Symbol exp = service.EvaluateExpression(new Expression(new StringSymbol(":"), new Symbol[]{
-                new Expression(new StringSymbol(":="),
+        Symbol exp = service.evaluateExpression(new Expression(new StringSymbol("List"), new Symbol[]{
+                new Expression(new StringSymbol("Set"),
                         new Symbol[]{
                                 new StringSymbol("e"),
                                 new Expression(new StringSymbol("+"),
