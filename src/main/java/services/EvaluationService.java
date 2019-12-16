@@ -10,6 +10,7 @@ import java.util.function.Function;
 public class EvaluationService {
     private HashMap<StringSymbol, Symbol> stringSymbolRules;
     private HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules;
+    private int maxEvaluationCount = 10000;
 
     public EvaluationService(HashMap<StringSymbol, Symbol> stringSymbolRules,
                              HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules) {
@@ -20,22 +21,29 @@ public class EvaluationService {
     }
 
     public Symbol EvaluateSymbol(Symbol symbol){
+        // Checking if symbol should be evaluated as Expression
         if (symbol instanceof Expression){
             return EvaluateExpression((Expression) symbol);
-        } else {
-            StringSymbol stringSymbol = (StringSymbol) symbol;
-
-            if (stringSymbolRules.containsKey(stringSymbol)){
-                Symbol newValue = stringSymbolRules.get(stringSymbol);
-                while (newValue != EvaluateSymbol(newValue)){
-                    newValue = EvaluateSymbol(newValue);
-                }
-                return newValue;
-            } else {
-                return stringSymbol;
-            }
-
         }
+
+        // Checking if symbol shouldn't be evaluated
+        StringSymbol stringSymbol = (StringSymbol) symbol;
+        if (!stringSymbolRules.containsKey(stringSymbol)){
+            return stringSymbol;
+        }
+
+        // Evaluating symbol until no changes applied
+        Symbol newValue = stringSymbolRules.get(stringSymbol);
+        int evaluationCount = 0;
+        while (evaluationCount < maxEvaluationCount
+                && newValue != EvaluateSymbol(newValue)){
+            evaluationCount++;
+            newValue = EvaluateSymbol(newValue);
+        }
+        return newValue;
+
+
+
     }
 
     public Symbol EvaluateExpression(Expression baseExpression){
