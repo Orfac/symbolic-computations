@@ -1,5 +1,6 @@
 package services;
 
+import model.Constant;
 import model.Expression;
 import model.Symbol;
 import model.StringSymbol;
@@ -26,6 +27,11 @@ public class EvaluationService {
             return evaluateExpression((Expression) symbol);
         }
 
+        // Checking if symbol is constant, so it is already evaluated
+        if (symbol instanceof Constant){
+            return symbol;
+        }
+
         // Checking if symbol shouldn't be evaluated
         StringSymbol stringSymbol = (StringSymbol) symbol;
         if (!stringSymbolRules.containsKey(stringSymbol)){
@@ -41,8 +47,6 @@ public class EvaluationService {
             newValue = evaluateSymbol(newValue);
         }
         return newValue;
-
-
 
     }
 
