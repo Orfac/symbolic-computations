@@ -20,10 +20,10 @@ public class EvaluationService {
         this.expressionRules.put(new StringSymbol("List"), this::listRule);
     }
 
-    public Symbol EvaluateSymbol(Symbol symbol){
+    public Symbol evaluateSymbol(Symbol symbol){
         // Checking if symbol should be evaluated as Expression
         if (symbol instanceof Expression){
-            return EvaluateExpression((Expression) symbol);
+            return evaluateExpression((Expression) symbol);
         }
 
         // Checking if symbol shouldn't be evaluated
@@ -36,9 +36,9 @@ public class EvaluationService {
         Symbol newValue = stringSymbolRules.get(stringSymbol);
         int evaluationCount = 0;
         while (evaluationCount < maxEvaluationCount
-                && newValue != EvaluateSymbol(newValue)){
+                && newValue != evaluateSymbol(newValue)){
             evaluationCount++;
-            newValue = EvaluateSymbol(newValue);
+            newValue = evaluateSymbol(newValue);
         }
         return newValue;
 
@@ -46,14 +46,14 @@ public class EvaluationService {
 
     }
 
-    public Symbol EvaluateExpression(Expression baseExpression){
+    public Symbol evaluateExpression(Expression baseExpression){
         if (!expressionRules.containsKey(baseExpression.getHead())){
             return baseExpression;
         }
 
         Symbol[] evaluatedSymbols = new Symbol[baseExpression.getArguments().length];
         for (int i = 0; i < evaluatedSymbols.length; i++) {
-            evaluatedSymbols[i] = this.EvaluateSymbol(baseExpression.getArguments()[i]);
+            evaluatedSymbols[i] = this.evaluateSymbol(baseExpression.getArguments()[i]);
         }
 
         return expressionRules.get(baseExpression.getHead()).apply(evaluatedSymbols);
@@ -68,8 +68,8 @@ public class EvaluationService {
 
     private Symbol listRule(Symbol[] symbols) {
         for (int i = 0; i < symbols.length - 1; i++) {
-            EvaluateSymbol(symbols[i]);
+            evaluateSymbol(symbols[i]);
         }
-        return EvaluateSymbol(symbols[symbols.length-1]);
+        return evaluateSymbol(symbols[symbols.length-1]);
     }
 }
