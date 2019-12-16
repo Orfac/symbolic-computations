@@ -15,8 +15,8 @@ public class EvaluationService {
                              HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules) {
         this.stringSymbolRules = stringSymbolRules;
         this.expressionRules = expressionRules;
-        this.expressionRules.put(new StringSymbol(":="), this::setRule);
-        this.expressionRules.put(new StringSymbol(":"), this::listRule);
+        this.expressionRules.put(new StringSymbol("Set"), this::setRule);
+        this.expressionRules.put(new StringSymbol("List"), this::listRule);
     }
 
     public Symbol EvaluateSymbol(Symbol symbol){
@@ -59,6 +59,9 @@ public class EvaluationService {
     }
 
     private Symbol listRule(Symbol[] symbols) {
+        for (int i = 0; i < symbols.length - 1; i++) {
+            EvaluateSymbol(symbols[i]);
+        }
         return EvaluateSymbol(symbols[symbols.length-1]);
     }
 }
