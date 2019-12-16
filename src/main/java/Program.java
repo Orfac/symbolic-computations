@@ -13,10 +13,13 @@ import java.util.function.Function;
 
 public class Program {
     public static void main(final String[] args) {
-//        FileWorkerService fileService = new FileWorkerService();
+
 //        InputDto inputDto = fileService.getInputDto(args[0]);
 //
 //        System.out.println(inputDto);
+
+        FileWorkerService fileService = new FileWorkerService();
+
         Function<Symbol[], Symbol> function = symbols -> new Expression(new StringSymbol("Sum"), symbols);
 
         HashMap<StringSymbol,Symbol> symbolRules = new HashMap<>();
@@ -35,7 +38,7 @@ public class Program {
                                 new Expression(new StringSymbol("+"),
                                         new Symbol[]{new StringSymbol("b"),  new StringSymbol("c"),
                                                 new Expression(new StringSymbol("+"),
-                                                        new Symbol[]{new Constant(5),  new Constant(6)})}),
+                                                        new Symbol[]{new Constant(5),  new Constant(7)})}),
                         }),
                 new StringSymbol("e")
         }));
@@ -49,5 +52,6 @@ public class Program {
         ConverterService converterService = new ConverterService(convertDictionary);
 
         System.out.println(converterService.convertSymbolsAsAsciiMath(exp));
+        fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(exp), args[1]);
     }
 }

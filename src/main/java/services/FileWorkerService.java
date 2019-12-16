@@ -2,14 +2,13 @@ package services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.InputDto;
-import model.Expression;
-import model.StringSymbol;
-import model.Symbol;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
 
 public class FileWorkerService {
     public InputDto getInputDto(String fileName){
@@ -28,15 +27,18 @@ public class FileWorkerService {
         return new InputDto();
     }
 
-    private File getFileFromResources(String fileName){
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        URL resource = classLoader.getResource(fileName);
-        if (resource == null) {
-            System.out.println("Файл отсутсвует!\nБудет создан новый файл!");
-            return new File(Paths.get("src", "main","resources").toString() + "/" + fileName);
-        } else {
-            return new File(resource.getFile());
+    public boolean saveExpression(String str, String fileName) {
+        File file = getFileFromResources(fileName);
+        try(FileWriter fileWriter = new FileWriter(file.getPath(), false)) {
+            fileWriter.write(String.format("`%s`", str));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
+
+        return true;
+    }
+
+    private File getFileFromResources(String fileName){
+        return new File(Paths.get("src", "main","resources").toString() + "/" + fileName);
     }
 }
