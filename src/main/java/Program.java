@@ -2,8 +2,10 @@ import model.Constant;
 import model.Expression;
 import model.Symbol;
 import model.StringSymbol;
+import services.ConverterService;
 import services.EvaluationService;
 import services.InitializationService;
+import services.FileWorkerService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,11 +33,21 @@ public class Program {
                         new Symbol[]{
                                 new StringSymbol("e"),
                                 new Expression(new StringSymbol("+"),
-                                        new Symbol[]{new Constant(6), new Constant(5)}),
+                                        new Symbol[]{new StringSymbol("b"),  new StringSymbol("c"),
+                                                new Expression(new StringSymbol("+"),
+                                                        new Symbol[]{new Constant(5),  new Constant(6)})}),
                         }),
                 new StringSymbol("e")
         }));
 
         System.out.println(exp);
+
+        HashMap convertDictionary  = new HashMap(){{
+            put("Sum", "+");
+        }};
+
+        ConverterService converterService = new ConverterService(convertDictionary);
+
+        System.out.println(converterService.convertSymbolsAsAsciiMath(exp));
     }
 }

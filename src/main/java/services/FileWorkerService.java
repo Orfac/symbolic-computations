@@ -2,10 +2,14 @@ package services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.InputDto;
+import model.Expression;
+import model.StringSymbol;
+import model.Symbol;
 
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
 public class FileWorkerService {
     public InputDto getInputDto(String fileName){
