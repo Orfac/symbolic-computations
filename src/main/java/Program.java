@@ -19,13 +19,7 @@ public class Program {
 
         FileWorkerService fileService = new FileWorkerService();
 
-        Function<Symbol[], Symbol> function = symbols -> new Expression(new StringSymbol("Sum"), symbols);
-
         HashMap<StringSymbol,Symbol> symbolRules = new HashMap<>();
-        symbolRules.put(
-                new StringSymbol("a"),
-                new Expression(new StringSymbol("Sum"), new Symbol[] {new StringSymbol("b"), new StringSymbol("c")}));
-
         HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules = InitializationService.generateExpressionMap();
 
         EvaluationService service = new EvaluationService( symbolRules,expressionRules);
