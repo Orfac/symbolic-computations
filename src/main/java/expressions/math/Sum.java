@@ -8,7 +8,7 @@ import model.Symbol;
 import java.util.function.Function;
 
 public class Sum {
-    private Function<Symbol[], Symbol> expression =
+    private static Function<Symbol[], Symbol> expression =
             symbols -> {
                 if (symbols[0] instanceof Constant && symbols[1] instanceof Constant){
                     double left = ((Constant) symbols[0]).getValue();
@@ -18,7 +18,7 @@ public class Sum {
                 return new Expression(new StringSymbol("Sum"), symbols );
             };
 
-    public Function<Symbol[], Symbol> getExpression() {
+    public static Function<Symbol[], Symbol> getExpression() {
         return expression;
     }
 }
