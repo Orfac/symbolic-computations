@@ -2,6 +2,8 @@ package services;
 
 import expressions.logic.*;
 import expressions.math.Sum;
+import expressions.seq.SequenceFunctions;
+import expressions.seq.While;
 import model.StringSymbol;
 import model.Symbol;
 
@@ -17,6 +19,7 @@ public class InitializationService {
         expressionMap.put(LogicFunctions.Or, Or.getExpression());
         expressionMap.put(LogicFunctions.Not, Not.getExpression());
         expressionMap.put(LogicFunctions.Equal, Equal.getExpression());
+        expressionMap.put(SequenceFunctions.While, While.getExpression());
         return expressionMap;
     }
 }

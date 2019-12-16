@@ -1,5 +1,7 @@
 package services;
 
+import expressions.context.ContextFunctions;
+import expressions.seq.SequenceFunctions;
 import model.Constant;
 import model.Expression;
 import model.Symbol;
@@ -17,8 +19,8 @@ public class EvaluationService {
                              HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules) {
         this.stringSymbolRules = stringSymbolRules;
         this.expressionRules = expressionRules;
-        this.expressionRules.put(new StringSymbol("Set"), this::setRule);
-        this.expressionRules.put(new StringSymbol("List"), this::listRule);
+        this.expressionRules.put(ContextFunctions.Set, this::setRule);
+        this.expressionRules.put(SequenceFunctions.List, this::listRule);
     }
 
     public Symbol evaluateSymbol(Symbol symbol){

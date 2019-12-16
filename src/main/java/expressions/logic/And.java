@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 public class And {
     private static Function<Symbol[], Symbol> expression =
-            symbols -> new Expression(new StringSymbol("If"),
+            symbols -> new Expression(LogicFunctions.If,
                     new Symbol[] {
                             symbols[0],
                             symbols[1],
