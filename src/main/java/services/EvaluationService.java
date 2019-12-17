@@ -67,7 +67,8 @@ public class EvaluationService {
 
     public Symbol evaluateExpression(Expression baseExpression){
 
-        if (!expressionRules.containsKey(baseExpression.getHead())){
+        Symbol head = evaluateSymbol(baseExpression.getHead());
+        if (!expressionRules.containsKey(head)){
             return baseExpression;
         }
 
