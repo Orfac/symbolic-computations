@@ -1,5 +1,7 @@
 package services;
 
+import expressions.context.ContextFunctions;
+import expressions.context.Get;
 import expressions.logic.*;
 import expressions.math.Sum;
 import expressions.seq.SequenceFunctions;
@@ -20,6 +22,7 @@ public class InitializationService {
         expressionMap.put(LogicFunctions.Not, Not.getExpression());
         expressionMap.put(LogicFunctions.Equal, Equal.getExpression());
         expressionMap.put(SequenceFunctions.While, While.getExpression());
+        expressionMap.put(ContextFunctions.Get, Get.getExpression());
         return expressionMap;
     }
 }
