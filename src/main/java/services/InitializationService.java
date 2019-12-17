@@ -34,6 +34,7 @@ public class InitializationService {
         expressionMap.put(CoreFunctions.SingleExpress, SingleExpress.getExpression());
         expressionMap.put(CoreFunctions.Contains, Contains.getExpression());
         expressionMap.put(CoreFunctions.Transitive, Transitive.getExpression());
+        expressionMap.put(CoreFunctions.Express, Express.getExpression());
 
         expressionMap.put(SequenceFunctions.While, While.getExpression());
         expressionMap.put(ContextFunctions.Get, Get.getExpression());

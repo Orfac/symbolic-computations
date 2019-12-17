@@ -43,12 +43,14 @@ public class Program {
 //            fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(symbol), args[1]);
 //        }
 
-        Symbol exp = service.evaluate(new Expression(CoreFunctions.SingleExpress, new Symbol[]{
-                new Expression(MathFunction.Sum, new Symbol[]{
-                        new StringSymbol("X"),
-                        new Constant(2)
+        Symbol exp = service.evaluate(new Expression(CoreFunctions.Express, new Symbol[]{
+                new Expression(MathFunction.Equality, new Symbol[]{
+                        new Expression(MathFunction.Div, new Symbol[]{
+                                new Constant(2),
+                                new StringSymbol("X")
+                        }),
+                        new Constant(5),
                 }),
-                new Constant(5),
                 new StringSymbol("X")
         }));
 
