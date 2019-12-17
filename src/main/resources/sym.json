@@ -1,7 +1,7 @@
 {
   "expression" : {
     "head" : {
-      "symbol" : "="
+      "symbol" : "Equality"
     },
     "arguments" : [
 
@@ -14,7 +14,7 @@
       {
         "expression": {
           "head": {
-            "symbol": "^1/"
+            "symbol": "Sum"
           },
           "arguments": [
             {
@@ -25,8 +25,8 @@
             },
             {
               "symbol" : {
-                "value": "b",
-                "type": "symbol"
+                "value": "2",
+                "type": "constant"
               }
             }
           ]
