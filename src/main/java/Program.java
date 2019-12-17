@@ -6,9 +6,9 @@ import services.ConverterService;
 import services.EvaluationService;
 import services.InitializationService;
 import services.FileWorkerService;
+import visitors.Impl.ModelVisitorImpl;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
 public class Program {
@@ -16,6 +16,10 @@ public class Program {
 //        InputDto inputDto = fileService.getInputDto(args[0]);
 //
 //        System.out.println(inputDto);
+
+        ModelVisitorImpl modelVisitor = new ModelVisitorImpl();
+
+        System.out.println(modelVisitor.instanceOf(new StringSymbol("list"), Constant.class));
 
         FileWorkerService fileService = new FileWorkerService();
 
@@ -30,9 +34,15 @@ public class Program {
                                 new Expression(new StringSymbol("Sum"),
                                         new Symbol[]{
                                                 new StringSymbol("b"),
-                                                new StringSymbol("c"),
-                                                new Expression(new StringSymbol("Sum"),
-                                                        new Symbol[]{new Constant(5),  new Constant(6)})}),
+                                                new StringSymbol("b"),
+
+                                                new Expression(new StringSymbol("Oppos"),
+                                                        new Symbol[]{
+                                                                new Expression(new StringSymbol("Mul"),
+                                                                        new Symbol[]{
+                                                                                new Expression(new StringSymbol("Div"),
+                                                                                        new Symbol[]{new Constant(10), new Constant(5)}),
+                                                                                new Constant(5),  new StringSymbol("a")})})}),
                         }),
                 new StringSymbol("e")
         }));
@@ -41,6 +51,9 @@ public class Program {
 
         HashMap convertDictionary  = new HashMap(){{
             put("Sum", "+");
+            put("Mul", "*");
+            put("Sub", "-");
+            put("Div", "/");
         }};
 
         ConverterService converterService = new ConverterService(convertDictionary);

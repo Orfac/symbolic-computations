@@ -69,7 +69,7 @@ public class EvaluationService {
     private Symbol setRule(Symbol[] symbols) {
         stringSymbolRules.put((StringSymbol) symbols[0], symbols[1]);
 
-        return new StringSymbol("set");
+        return new StringSymbol("Set");
     }
 
     private Symbol listRule(Symbol[] symbols) {

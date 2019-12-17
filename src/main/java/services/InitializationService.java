@@ -21,6 +21,12 @@ public class InitializationService {
         expressionMap.put(LogicFunctions.Or, Or.getExpression());
         expressionMap.put(LogicFunctions.Not, Not.getExpression());
         expressionMap.put(LogicFunctions.Equal, Equal.getExpression());
+        expressionMap.put(MathFunction.Sum, Sum.getExpression());
+        expressionMap.put(MathFunction.Mul, Mul.getExpression());
+        expressionMap.put(MathFunction.Sub, Sub.getExpression());
+        expressionMap.put(MathFunction.Div, Div.getExpression());
+        expressionMap.put(new StringSymbol("Oppos"), OppositeOperationMath.getExpression());
+
         expressionMap.put(SequenceFunctions.While, While.getExpression());
         expressionMap.put(ContextFunctions.Get, Get.getExpression());
         return expressionMap;
