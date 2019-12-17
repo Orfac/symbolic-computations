@@ -1,6 +1,7 @@
 package services;
 
 import expressions.context.ContextFunctions;
+import expressions.logic.LogicFunctions;
 import expressions.seq.SequenceFunctions;
 import model.Constant;
 import model.Expression;
@@ -71,6 +72,12 @@ public class EvaluationService {
         if (!expressionRules.containsKey(head)){
             return baseExpression;
         }
+
+        if (head.equals(LogicFunctions.If)){
+            Symbol evaluatedCheck = this.evaluate(baseExpression.getArguments()[0]);
+            return expressionRules.get(head).apply(new Symbol[]{evaluatedCheck, baseExpression.getArguments()[1], baseExpression.getArguments()[2]});
+        }
+
 
         Symbol[] evaluatedSymbols = new Symbol[baseExpression.getArguments().length];
         for (int i = 0; i < evaluatedSymbols.length; i++) {
