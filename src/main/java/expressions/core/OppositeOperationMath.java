@@ -22,15 +22,15 @@ public class OppositeOperationMath {
 
     private static Function<Symbol[], Symbol> expression =
             symbols -> {
-                if(symbols[0].instanceOf(modelVisitor, Expression.class)){
-                    Expression expression = (Expression) symbols[0];
+                if(symbols[0].instanceOf(modelVisitor, StringSymbol.class)){
+                    StringSymbol stringSymbol = (StringSymbol) symbols[0];
+                    return new StringSymbol(
+                            oppositeOperationMathMap.getOrDefault(
+                                    stringSymbol.getValue(),
+                                    stringSymbol.getValue()
+                            )
+                    );
 
-                    return new Expression(
-                            new StringSymbol(
-                                    oppositeOperationMathMap
-                                            .getOrDefault(
-                                                    expression.getHead().toString(),
-                                                    expression.getHead().toString())), expression.getArguments());
                 }
 
                 return symbols[0];

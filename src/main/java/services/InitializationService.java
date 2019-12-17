@@ -1,5 +1,6 @@
 package services;
 
+import expressions.context.GetHead;
 import expressions.core.*;
 import expressions.context.ContextFunctions;
 import expressions.context.Get;
@@ -36,6 +37,7 @@ public class InitializationService {
 
         expressionMap.put(SequenceFunctions.While, While.getExpression());
         expressionMap.put(ContextFunctions.Get, Get.getExpression());
+        expressionMap.put(ContextFunctions.GetHead, GetHead.getExpression());
         return expressionMap;
     }
 }

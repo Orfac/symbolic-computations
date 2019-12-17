@@ -67,17 +67,17 @@ public class EvaluationService {
 
     public Symbol evaluateExpression(Expression baseExpression){
 
-        Symbol head = evaluateSymbol(baseExpression.getHead());
+        Symbol head = evaluate(baseExpression.getHead());
         if (!expressionRules.containsKey(head)){
             return baseExpression;
         }
 
         Symbol[] evaluatedSymbols = new Symbol[baseExpression.getArguments().length];
         for (int i = 0; i < evaluatedSymbols.length; i++) {
-            evaluatedSymbols[i] = this.evaluateSymbol(baseExpression.getArguments()[i]);
+            evaluatedSymbols[i] = this.evaluate(baseExpression.getArguments()[i]);
         }
 
-        return expressionRules.get(baseExpression.getHead()).apply(evaluatedSymbols);
+        return expressionRules.get(head).apply(evaluatedSymbols);
 
     }
 
