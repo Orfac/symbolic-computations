@@ -9,11 +9,11 @@ import java.util.function.Function;
 public class Get {
     private static Function<Symbol[], Symbol> expression =
             symbols -> {
-                Expression expression = (Expression) symbols[0];
+                Expression expression = (Expression) symbols[1];
 
                 Symbol[] arguments = expression.getArguments();
 
-                int index = (int) ((Constant)symbols[1]).getValue();
+                int index = (int) ((Constant)symbols[0]).getValue();
                 return arguments[index];
             };
 

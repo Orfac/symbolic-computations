@@ -7,4 +7,6 @@ public class MathFunction {
     public static StringSymbol Mul = new StringSymbol("Mul");
     public static StringSymbol Sub = new StringSymbol("Sub");
     public static StringSymbol Div = new StringSymbol("Div");
+    public static StringSymbol Equality = new StringSymbol("Equality");
+
 }

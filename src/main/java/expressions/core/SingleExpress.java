@@ -3,6 +3,7 @@ package expressions.core;
 import expressions.context.ContextFunctions;
 import expressions.context.Get;
 import expressions.logic.LogicFunctions;
+import expressions.math.MathFunction;
 import expressions.seq.SequenceFunctions;
 import model.Constant;
 import model.Expression;
@@ -42,19 +43,35 @@ public class SingleExpress {
                         }),
                         new Expression(LogicFunctions.If, new Symbol[]{
                                 new Expression(CoreFunctions.Contains, new Symbol[]{
-                                        symbols[2],
-                                        LeftValue
+                                        LeftValue,
+                                        symbols[2]
                                 }),
-                                new Expression(new Expression(CoreFunctions.GetOppositeOperation,
-                                        new Symbol[]{CurrentOperation}), new Symbol[]{
-                                                LeftValue,
-                                                RightValue
-                                }),
-                                new Expression(LogicFunctions.If, new Symbol[]{
-                                        new Expression(CoreFunctions.IsTransitive, new Symbol[]{
+                                new Expression(MathFunction.Equality, new Symbol[]{
+                                        LeftValue,
+                                        new Expression(new Expression(CoreFunctions.GetOppositeOperation, new Symbol[]{
                                                 CurrentOperation
-                                        }),
-
+                                        }), new Symbol[]{
+                                                symbols[1],
+                                                RightValue
+                                        })
+                                }),
+                                new Expression(MathFunction.Equality, new Symbol[]{
+                                        RightValue,
+                                        new Expression(LogicFunctions.If, new Symbol[]{
+                                                new Expression(CoreFunctions.Transitive, new Symbol[]{
+                                                        CurrentOperation
+                                                }),
+                                                new Expression(CurrentOperation, new Symbol[]{
+                                                        LeftValue,
+                                                        symbols[1]
+                                                }),
+                                                new Expression(new Expression(CoreFunctions.GetOppositeOperation, new Symbol[]{
+                                                        CurrentOperation
+                                                }), new Symbol[]{
+                                                        symbols[1],
+                                                        LeftValue
+                                                })
+                                        })
                                 })
                         })
                 });

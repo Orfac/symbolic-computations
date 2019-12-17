@@ -1,3 +1,5 @@
+import expressions.core.CoreFunctions;
+import expressions.math.MathFunction;
 import model.Constant;
 import model.Expression;
 import model.Symbol;
@@ -27,26 +29,15 @@ public class Program {
         HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules = InitializationService.generateExpressionMap();
 
         EvaluationService service = new EvaluationService( symbolRules,expressionRules);
-        Symbol exp = service.evaluateExpression(new Expression(new StringSymbol("List"), new Symbol[]{
-                new Expression(new StringSymbol("Set"),
-                        new Symbol[]{
-                                new StringSymbol("e"),
-                                new Expression(new StringSymbol("Sum"),
-                                        new Symbol[]{
-                                                new StringSymbol("b"),
-                                                new StringSymbol("b"),
-
-                                                new Expression(new StringSymbol("Oppos"),
-                                                        new Symbol[]{
-                                                                new Expression(new StringSymbol("Mul"),
-                                                                        new Symbol[]{
-                                                                                new Expression(new StringSymbol("Div"),
-                                                                                        new Symbol[]{new Constant(10), new Constant(5)}),
-                                                                                new Constant(5),  new StringSymbol("a")})})}),
-                        }),
-                new StringSymbol("e")
+        Symbol exp = service.evaluate(new Expression(CoreFunctions.SingleExpress, new Symbol[]{
+                new Expression(MathFunction.Sum, new Symbol[]{
+                        new StringSymbol("X"),
+                        new Constant(2)
+                }),
+                new Constant(5),
+                new StringSymbol("X")
         }));
-
+        Symbol exp2 = service.evaluateExpression((Expression)exp);
         System.out.println(exp);
 
         HashMap convertDictionary  = new HashMap(){{

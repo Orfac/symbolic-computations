@@ -7,7 +7,7 @@ public class CoreFunctions {
     public static StringSymbol SingleExpress = new StringSymbol("SingleExpress");
     public static StringSymbol Express = new StringSymbol("Express");
     public static StringSymbol GetOppositeOperation = new StringSymbol("GetOppositeOperation");
-    public static StringSymbol IsTransitive = new StringSymbol("IsTransitive");
+    public static StringSymbol Transitive = new StringSymbol("Transitive");
 
 
 }

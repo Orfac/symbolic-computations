@@ -23,10 +23,23 @@ public class EvaluationService {
         this.expressionRules.put(SequenceFunctions.List, this::listRule);
     }
 
+    public Symbol evaluate(Symbol symbol){
+        Symbol evaluatedSymbol = evaluateSymbol(symbol);
+        int evaluationCount = 0;
+        boolean compareResult = true;
+        do {
+            Symbol newSymbol = evaluateSymbol(evaluatedSymbol);
+            compareResult = SymbolComparer.Compare(evaluatedSymbol,newSymbol);
+            evaluatedSymbol = newSymbol;
+            evaluationCount++;
+        } while (evaluationCount < maxEvaluationCount && !compareResult);
+        return evaluatedSymbol;
+    }
+
     public Symbol evaluateSymbol(Symbol symbol){
         // Checking if symbol should be evaluated as Expression
         if (symbol instanceof Expression){
-            return evaluateExpression((Expression) symbol);
+             return evaluateExpression((Expression) symbol);
         }
 
         // Checking if symbol is constant, so it is already evaluated
@@ -53,6 +66,7 @@ public class EvaluationService {
     }
 
     public Symbol evaluateExpression(Expression baseExpression){
+
         if (!expressionRules.containsKey(baseExpression.getHead())){
             return baseExpression;
         }

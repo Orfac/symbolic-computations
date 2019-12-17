@@ -5,6 +5,7 @@ import visitors.ModelVisitor;
 import visitors.mathVisitors.SumVisitor;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Expression extends Symbol  {
     private Symbol head;
@@ -19,6 +20,22 @@ public class Expression extends Symbol  {
         this.arguments = arguments;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Expression)) return false;
+
+        Expression that = (Expression) o;
+        return Objects.equals(getHead(), that.getHead()) &&
+                Arrays.equals(getArguments(), that.getArguments());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getHead());
+        result = 31 * result + Arrays.hashCode(getArguments());
+        return result;
+    }
 
     public Symbol getHead() {
         return head;
