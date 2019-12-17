@@ -26,13 +26,13 @@ public class Mul {
                         addAll(Arrays.asList(symbols).subList(2, symbols.length));
                     }};
 
-                        return new Expression(new StringSymbol("Mul"), symbolList.toArray(new Symbol[0]));
+                        return new Expression(MathFunction.Mul, symbolList.toArray(new Symbol[0]));
                     }
 
                     return new Constant(left * right);
                 }
 
-                return new Expression(new StringSymbol("Mul"), symbols );
+                return new Expression(MathFunction.Mul, symbols );
             };
 
     public static Function<Symbol[], Symbol> getExpression() { return expression; }
