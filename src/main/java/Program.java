@@ -30,33 +30,17 @@ public class Program {
         FileWorkerService fileService = new FileWorkerService();
         EvaluationService service = new EvaluationService(symbolRules, expressionRules);
 
-//        Symbol symbol = converterService.convertFromDtoToModel(fileService.getInputDto(args[0]));
-//
-//        Symbol exp = service.evaluateSymbol(symbol);
-//        System.out.println(exp);
-//
-//        if(exp != null) {
-//            System.out.println(converterService.convertSymbolsAsAsciiMath(exp));
-//            fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(exp), args[1]);
-//        } else {
-//            System.out.println(converterService.convertSymbolsAsAsciiMath(symbol));
-//            fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(symbol), args[1]);
-//        }
+        Symbol symbol = converterService.convertFromDtoToModel(fileService.getInputDto(args[0]));
 
-        Symbol exp = service.evaluate(new Expression(CoreFunctions.Express, new Symbol[]{
-                new Expression(MathFunction.Equality, new Symbol[]{
-                        new Expression(MathFunction.Div, new Symbol[]{
-                                new Constant(2),
-                                new StringSymbol("X")
-                        }),
-                        new Constant(5),
-                }),
-                new StringSymbol("X")
-        }));
-
+        Symbol exp = service.evaluate(symbol);
         System.out.println(exp);
 
-//        System.out.println(converterService.convertSymbolsAsAsciiMath(exp));
-//        fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(exp), args[1]);
+        if(exp != null) {
+            System.out.println(converterService.convertSymbolsAsAsciiMath(exp));
+            fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(exp), args[1]);
+        } else {
+            System.out.println(converterService.convertSymbolsAsAsciiMath(symbol));
+            fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(symbol), args[1]);
+        }
     }
 }

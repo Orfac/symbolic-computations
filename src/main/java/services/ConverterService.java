@@ -30,7 +30,7 @@ public class ConverterService implements ConverterVisitor {
 
     public Symbol convertFromDtoToModel(InputDto inputDto){
         return new Expression(CoreFunctions.Express, new Symbol[] {
-            new StringSymbol(inputDto.getVariable()), convertExpressionDtoToSymbol(inputDto.getExpression())
+                convertExpressionDtoToSymbol(inputDto.getExpression()), new StringSymbol(inputDto.getVariable())
         });
     }
 

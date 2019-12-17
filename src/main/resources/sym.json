@@ -4,13 +4,6 @@
       "symbol" : "Equality"
     },
     "arguments" : [
-
-      {
-        "symbol" : {
-          "value": "10",
-          "type": "constant"
-        }
-      },
       {
         "expression": {
           "head": {
@@ -30,6 +23,12 @@
               }
             }
           ]
+        }
+      },
+      {
+        "symbol" : {
+          "value": "10",
+          "type": "constant"
         }
       }
     ]
