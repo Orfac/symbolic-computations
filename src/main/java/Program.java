@@ -44,17 +44,17 @@ public class Program {
 //        }
 
         Symbol exp = service.evaluate(new Expression(CoreFunctions.SingleExpress, new Symbol[]{
-                new Expression(MathFunction.Sum, new Symbol[]{
-                        new StringSymbol("X"),
+                new Expression(MathFunction.Mul, new Symbol[]{
+                        new StringSymbol("x"),
                         new Constant(2)
                 }),
-                new Constant(5),
-                new StringSymbol("X")
+                new Expression(MathFunction.Mul, new Symbol[]{new Constant(5), new Constant(5)}),
+                new StringSymbol("x")
         }));
 
         System.out.println(exp);
 
-//        System.out.println(converterService.convertSymbolsAsAsciiMath(exp));
-//        fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(exp), args[1]);
+        System.out.println(converterService.convertSymbolsAsAsciiMath(exp));
+        fileService.saveExpression(converterService.convertSymbolsAsAsciiMath(exp), args[1]);
     }
 }

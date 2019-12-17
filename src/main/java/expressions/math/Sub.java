@@ -2,7 +2,6 @@ package expressions.math;
 
 import model.Constant;
 import model.Expression;
-import model.StringSymbol;
 import model.Symbol;
 import visitors.Impl.ModelVisitorImpl;
 
@@ -17,7 +16,7 @@ public class Sub {
                     return new Constant(((Constant) symbols[0]).getValue() - ((Constant) symbols[1]).getValue());
                 }
 
-                return new Expression(new StringSymbol("Sub"), symbols );
+                return new Expression(MathFunction.Sub, symbols );
             };
 
     public static Function<Symbol[], Symbol> getExpression() {

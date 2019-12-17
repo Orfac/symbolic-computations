@@ -5,6 +5,7 @@ import dto.ExpressionDto;
 import dto.InputDto;
 import dto.SymbolDto;
 import expressions.core.CoreFunctions;
+import expressions.core.Express;
 import model.Constant;
 import model.Expression;
 import model.StringSymbol;
@@ -68,18 +69,24 @@ public class ConverterService implements ConverterVisitor {
 
     @Override
     public String convertExpression(Expression expression) {
-        String result = String.format("(%s", convertSymbolsAsAsciiMath(expression.getArguments()[0]));
-        String operationName = convertDictionary.getOrDefault(expression.getHead().toString(), "");
+        if(!expression.getHead().toString().equals("Equality")){
+            String result = String.format("(%s", convertSymbolsAsAsciiMath(expression.getArguments()[0]));
 
-        for(int i = 1; i < expression.getArguments().length; i++) {
+            return String.format("%s)", convertArguments(result, expression.getArguments(), expression.getHead()));
+        } else {
+            return convertArguments(expression.getArguments()[0].toString(), expression.getArguments(), expression.getHead());
+        }
+    }
+
+    private String convertArguments(String result, Symbol[] symbols, Symbol head){
+        String operationName = convertDictionary.getOrDefault(head.toString(), "");
+        for(int i = 1; i < symbols.length; i++) {
 
             result = String.format("%s %s %s",
                     result,
                     operationName,
-                    convertSymbolsAsAsciiMath(expression.getArguments()[i]));
+                    convertSymbolsAsAsciiMath(symbols[i]));
         }
-
-        result += ")";
 
         return result;
     }

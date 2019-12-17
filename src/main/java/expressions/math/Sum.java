@@ -25,12 +25,12 @@ public class Sum implements SumVisitor {
                     return new Constant(left + right);
                 } else if(modelVisitor.instanceOf(symbols[0], StringSymbol.class) && modelVisitor.instanceOf(symbols[1], StringSymbol.class) && symbols[0].equals(symbols[1])) {
                     List<Symbol> symbolList = new ArrayList<>();
-                    symbolList.add(new Expression(new StringSymbol("Mul"), new Symbol[] { new Constant(2), symbols[0] }));
+                    symbolList.add(new Expression(MathFunction.Sum, new Symbol[] { new Constant(2), symbols[0] }));
                     symbolList.addAll(Arrays.asList(symbols).subList(2, symbols.length));
 
-                    return new Expression(new StringSymbol("Sum"), symbolList.toArray(new Symbol[0])) ;
+                    return new Expression(MathFunction.Sum, symbolList.toArray(new Symbol[0])) ;
                 }
-                return new Expression(new StringSymbol("Sum"), symbols );
+                return new Expression(MathFunction.Sum, symbols );
             };
 
     public static Function<Symbol[], Symbol> getExpression() {
