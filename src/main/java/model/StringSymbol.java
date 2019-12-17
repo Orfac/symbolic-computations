@@ -1,6 +1,9 @@
 package model;
 
 import lombok.Data;
+import visitors.ConverterVisitor;
+import visitors.ModelVisitor;
+import visitors.mathVisitors.SumVisitor;
 
 import java.util.Objects;
 
@@ -22,6 +25,12 @@ public class StringSymbol extends Symbol {
     }
 
     @Override
+    public boolean instanceOf(ModelVisitor visitor, Class className) { return visitor.instanceofStringSymbol(this, className); }
+
+    @Override
+    public String convertToAsciiMath(ConverterVisitor visitor) { return visitor.convertStringSymbol(this); }
+
+    @Override
     public int hashCode() {
         return Objects.hash(getValue());
     }
@@ -30,4 +39,13 @@ public class StringSymbol extends Symbol {
     public String toString(){
         return this.value;
     }
+
+    @Override
+    public Symbol sumSymbols(SumVisitor visitor, Constant constant, Symbol[] symbols) { return visitor.sumByDefault(this, constant, symbols); }
+
+    @Override
+    public Symbol sumSymbols(SumVisitor visitor, StringSymbol stringSymbol, Symbol[] symbols) { return visitor.sumStringSymbols(this, stringSymbol, symbols); }
+
+    @Override
+    public Symbol sumSymbols(SumVisitor visitor, Expression expression, Symbol[] symbols) { return visitor.sumByDefault(this, expression, symbols); }
 }

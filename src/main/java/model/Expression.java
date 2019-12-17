@@ -1,5 +1,9 @@
 package model;
 
+import visitors.ConverterVisitor;
+import visitors.ModelVisitor;
+import visitors.mathVisitors.SumVisitor;
+
 import java.util.Arrays;
 
 public class Expression extends Symbol  {
@@ -29,4 +33,18 @@ public class Expression extends Symbol  {
         return head.toString() + Arrays.toString(arguments);
     }
 
+    @Override
+    public boolean instanceOf(ModelVisitor visitor, Class className) { return visitor.instanceofExpression(this, className); }
+
+    @Override
+    public String convertToAsciiMath(ConverterVisitor visitor) { return visitor.convertExpression(this); }
+
+    @Override
+    public Symbol sumSymbols(SumVisitor visitor, Constant constant, Symbol[] symbols) { return visitor.sumByDefault(this, constant, symbols); }
+
+    @Override
+    public Symbol sumSymbols(SumVisitor visitor, StringSymbol stringSymbol, Symbol[] symbols) { return visitor.sumByDefault(this, stringSymbol, symbols); }
+
+    @Override
+    public Symbol sumSymbols(SumVisitor visitor, Expression expression, Symbol[] symbols) { return visitor.sumExpressions(this, expression, symbols); }
 }
