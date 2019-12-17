@@ -11,9 +11,24 @@
           },
           "arguments": [
             {
-              "symbol" : {
-                "value": "a",
-                "type": "symbol"
+              "expression": {
+                "head": {
+                  "symbol": "Div"
+                },
+                "arguments": [
+                  {
+                    "symbol" : {
+                      "value": "2",
+                      "type": "constant"
+                    }
+                  },
+                  {
+                    "symbol" : {
+                      "value": "a",
+                      "type": "symbol"
+                    }
+                  }
+                ]
               }
             },
             {

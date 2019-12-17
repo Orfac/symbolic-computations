@@ -42,4 +42,11 @@ public class InitializationService {
         expressionMap.put(ContextFunctions.GetHead, GetHead.getExpression());
         return expressionMap;
     }
+
+    public static HashMap<StringSymbol, Boolean> generateHoldRestMap(){
+        HashMap<StringSymbol,Boolean> holdRestMap = new HashMap<>();
+        holdRestMap.put(LogicFunctions.If, true);
+        return holdRestMap;
+    }
+
 }

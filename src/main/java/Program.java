@@ -1,8 +1,3 @@
-import dto.InputDto;
-import expressions.core.CoreFunctions;
-import expressions.math.MathFunction;
-import model.Constant;
-import model.Expression;
 import model.Symbol;
 import model.StringSymbol;
 import services.ConverterService;
@@ -25,10 +20,11 @@ public class Program {
     public static void main(final String[] args) {
         HashMap<StringSymbol,Symbol> symbolRules = new HashMap<>();
         HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules = InitializationService.generateExpressionMap();
-        
+        HashMap<StringSymbol, Boolean> holdRestRules = InitializationService.generateHoldRestMap();
+
         ConverterService converterService = new ConverterService(convertDictionary);
         FileWorkerService fileService = new FileWorkerService();
-        EvaluationService service = new EvaluationService(symbolRules, expressionRules);
+        EvaluationService service = new EvaluationService(symbolRules, expressionRules, holdRestRules);
 
         Symbol symbol = converterService.convertFromDtoToModel(fileService.getInputDto(args[0]));
 

@@ -14,14 +14,17 @@ import java.util.function.Function;
 public class EvaluationService {
     private HashMap<StringSymbol, Symbol> stringSymbolRules;
     private HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules;
+    private HashMap<StringSymbol, Boolean> holdRestRules;
     private int maxEvaluationCount = 10000;
 
     public EvaluationService(HashMap<StringSymbol, Symbol> stringSymbolRules,
-                             HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules) {
+                             HashMap<StringSymbol, Function<Symbol[], Symbol>> expressionRules, HashMap<StringSymbol, Boolean> holdRestRules) {
         this.stringSymbolRules = stringSymbolRules;
         this.expressionRules = expressionRules;
+        this.holdRestRules = holdRestRules;
         this.expressionRules.put(ContextFunctions.Set, this::setRule);
         this.expressionRules.put(SequenceFunctions.List, this::listRule);
+
     }
 
     public Symbol evaluate(Symbol symbol){
@@ -73,19 +76,24 @@ public class EvaluationService {
             return baseExpression;
         }
 
-        if (head.equals(LogicFunctions.If)){
-            Symbol evaluatedCheck = this.evaluate(baseExpression.getArguments()[0]);
-            return expressionRules.get(head).apply(new Symbol[]{evaluatedCheck, baseExpression.getArguments()[1], baseExpression.getArguments()[2]});
+        Symbol[] arguments;
+        if (holdRestRules.containsKey(head)){
+            arguments = this.evaluateHoldRestExpression(baseExpression, head);
+        } else {
+            arguments  = new Symbol[baseExpression.getArguments().length];
+            for (int i = 0; i < arguments.length; i++) {
+                arguments[i] = this.evaluate(baseExpression.getArguments()[i]);
+            }
         }
 
+        return expressionRules.get(head).apply(arguments);
 
-        Symbol[] evaluatedSymbols = new Symbol[baseExpression.getArguments().length];
-        for (int i = 0; i < evaluatedSymbols.length; i++) {
-            evaluatedSymbols[i] = this.evaluate(baseExpression.getArguments()[i]);
-        }
+    }
 
-        return expressionRules.get(head).apply(evaluatedSymbols);
-
+    private Symbol[] evaluateHoldRestExpression(Expression baseExpression, Symbol head) {
+        Symbol[] updatedArguments = baseExpression.getArguments().clone();
+        updatedArguments[0] = this.evaluate(baseExpression.getArguments()[0]);
+        return updatedArguments;
     }
 
     private Symbol setRule(Symbol[] symbols) {
