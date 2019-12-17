@@ -1,9 +1,10 @@
 package services;
 
+import expressions.core.OppositeOperationMath;
 import expressions.context.ContextFunctions;
 import expressions.context.Get;
 import expressions.logic.*;
-import expressions.math.Sum;
+import expressions.math.*;
 import expressions.seq.SequenceFunctions;
 import expressions.seq.While;
 import model.StringSymbol;

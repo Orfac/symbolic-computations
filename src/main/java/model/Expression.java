@@ -7,14 +7,14 @@ import visitors.mathVisitors.SumVisitor;
 import java.util.Arrays;
 
 public class Expression extends Symbol  {
-    private StringSymbol head;
+    private Symbol head;
     private Symbol[] arguments;
 
-    public Expression(StringSymbol head){
+    public Expression(Symbol head){
         this.head = head;
     }
 
-    public Expression(StringSymbol head, Symbol[] arguments){
+    public Expression(Symbol head, Symbol[] arguments){
         this.head = head;
         this.arguments = arguments;
     }

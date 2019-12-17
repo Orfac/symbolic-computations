@@ -1,4 +1,4 @@
-package expressions;
+package expressions.core;
 
 import model.Constant;
 import model.Expression;

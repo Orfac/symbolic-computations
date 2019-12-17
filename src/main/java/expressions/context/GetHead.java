@@ -13,7 +13,7 @@ public class GetHead {
                 if (symbols[0] instanceof Expression){
                     return ((Expression)symbols[0]).getHead();
                 } else {
-                    return symbols[1];
+                    return symbols[0];
                 }
             };
 
